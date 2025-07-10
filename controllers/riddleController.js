@@ -1,4 +1,4 @@
-import { addriddle, showRiddle, showRiddles, updateRiddle } from "../data/riddlesService.js";
+import { addriddle, deleteRiddle, showRiddle, showRiddles, updateRiddle } from "../data/riddlesService.js";
 
 export async function getAllRiddles_GET(req, res) {
     const riddles = await showRiddles();
@@ -7,6 +7,7 @@ export async function getAllRiddles_GET(req, res) {
     }
     res.status(200).json(riddles);
 }
+
 export async function getRiddle_GET(req, res) {
     const riddles = await showRiddle(req.params.id);
     if (!riddles) {
@@ -40,5 +41,9 @@ export async function updateRiddle_PUT(req, res) {
     res.status(500).json({ msg: "Error update riddle." });
 }
 export async function deleteRiddle_DELETE(req, res) {
-    
+    const is_delete = await deleteRiddle(req.params.id);
+    if(is_delete){
+        return res.status(200).json({ msg: "Riddle deleted successfully." });
+    }
+    res.status(404).json({ msg: "Riddle not found." });
 }

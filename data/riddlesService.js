@@ -21,7 +21,6 @@ async function showRiddle(id) {
     }
 }
 
-
 async function addriddle(riddle){
     let data;
     try {
@@ -70,20 +69,24 @@ async function deleteRiddle(id){
         data = await readDBFile(path)
     } catch (error) {
         console.log(`Error read riddles: ${error}`)
-        return;
+        return false;
     }
     for (let i = 0; i < data.length; i++) {
-        if(data[i].id === id){
+        if(data[i].id == id){
             index = i
             break;
         }
     }
     try {
+        console.log(data);
         data.splice(index,1);
-        writeDBFile(path, data);
+        console.log(data);
+        await writeDBFile(path, data);
     } catch (error) {
         console.log(error)
+        return false;
     }    
+    return true;
 }
 
 export{
