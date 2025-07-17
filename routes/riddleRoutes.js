@@ -1,5 +1,7 @@
 import express from 'express';
 import { createRiddle, deleteRiddle, getAllRiddles, getRiddle, updateRiddle } from '../controllers/riddleController.js';
+import { validateId } from '../middlewares/validateId.js';
+import { validateBody } from '../middlewares/validateBody.js';
 
 
 const router = express.Router();
@@ -8,16 +10,16 @@ const router = express.Router();
 router.get("/", getAllRiddles)
 
 // GET /riddle/:id
-router.get("/:id", getRiddle)
+router.get("/:id",validateId, getRiddle)
 
 // POST /riddle
-router.post("/", createRiddle)
+router.post("/",validateBody,validateBody, createRiddle)
 
 // PUT /riddle/:id
-router.put("/:id", updateRiddle)
+router.put("/:id",validateId,validateBody, updateRiddle)
 
 // DELETE /riddle/:id
-router.delete("/:id", deleteRiddle)
+router.delete("/:id",validateId, deleteRiddle)
 
 
 export default router;

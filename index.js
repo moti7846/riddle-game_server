@@ -3,6 +3,7 @@ import logger from './middlewares/logger.js';
 import riddleRoutes from './routes/riddleRoutes.js';
 import playerRoutes from './routes/playerRoutes.js';
 import {config } from 'dotenv';
+import { initRiddles } from "./controllers/initRiddles.js";
 config();
 
 const PORT = process.env.PORT;
@@ -14,6 +15,7 @@ app.use(logger)
 
 app.use("/riddle" , riddleRoutes)
 app.use("/player" , playerRoutes)
+app.get("/load-initial-riddles" , initRiddles)
 
 app.use((req, res)=>{
   res.status(404).json({msg: "Route not found."});
