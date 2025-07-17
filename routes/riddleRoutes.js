@@ -1,23 +1,23 @@
 import express from 'express';
-import { createRiddle_POST, deleteRiddle_DELETE, getAllRiddles_GET, getRiddle_GET, updateRiddle_PUT } from '../controllers/riddleController.js';
+import { createRiddle, deleteRiddle, getAllRiddles, getRiddle, updateRiddle } from '../controllers/riddleController.js';
 
 
 const router = express.Router();
 
 // GET /riddle
-router.get("/", getAllRiddles_GET)
+router.get("/", getAllRiddles)
 
 // GET /riddle/:id
-router.get("/:id", getRiddle_GET)
+router.get("/:id", getRiddle)
 
 // POST /riddle
-router.post("/", createRiddle_POST)
+router.post("/", createRiddle)
 
 // PUT /riddle/:id
-router.put("/:id", updateRiddle_PUT)
+router.put("/:id", updateRiddle)
 
 // DELETE /riddle/:id
-router.delete("/:id", deleteRiddle_DELETE)
+router.delete("/:id", deleteRiddle)
 
 
 export default router;

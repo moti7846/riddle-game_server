@@ -1,5 +1,5 @@
 {
-  "name": "riddle-game_server",
+  "name": "mysql---sequelize",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
@@ -11,6 +11,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^5.1.0"
+    "@supabase/supabase-js": "^2.51.0",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "mongodb": "^6.17.0",
+    "sequelize": "^6.37.7"
   }
 }

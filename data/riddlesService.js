@@ -1,4 +1,4 @@
-import {writeDBFile, readDBFile} from "./DAL/functionDAL.js";
+import {writeDBFile, readDBFile} from "./DAL/CRUD.js";
 
 const path = "C:\\Users\\97253\\Desktop\\riddle-game_server\\data\\DB\\riddles.txt";
 

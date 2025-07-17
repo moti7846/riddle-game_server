@@ -2,7 +2,7 @@ import express from "express"
 import logger from './middlewares/logger.js';
 import riddleRoutes from './routes/riddleRoutes.js';
 import playerRoutes from './routes/playerRoutes.js';
-inport {config } from 'dotenv';
+import {config } from 'dotenv';
 config();
 
 const PORT = process.env.PORT;
@@ -16,7 +16,7 @@ app.use("/riddle" , riddleRoutes)
 app.use("/player" , playerRoutes)
 
 app.use((req, res)=>{
-        res.status(404).json({msg: "Route not found."});
+  res.status(404).json({msg: "Route not found."});
 })
 
 app.listen(PORT, () => {
