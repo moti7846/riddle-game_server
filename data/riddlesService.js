@@ -21,13 +21,11 @@ async function showRiddle(id) {
     }
 }
 
-
 async function addriddle(riddle){
     let data;
     try {
-        console.log("test 2");
         data = await readDBFile(path)
-        await data.push(riddle)
+        data.push(riddle)
     } catch (error) {
         console.log(`from addriddle: ${error}`);
         return false;
@@ -47,19 +45,21 @@ async function updateRiddle(riddle){
         data = await readDBFile(path)
     } catch (error) {
         console.log(`Error read riddles: ${error}`)
-        return
+        return false
     }
     for (let i = 0; i < data.length; i++) {
-        if(data[i].id === riddle.id){
+        if(data[i].id == riddle.id){
             data[i] = riddle;
             break;
         }
     }
     try {
-        writeDBFile(path, data)
+        await writeDBFile(path, data)
     } catch (error) {
+        return false
         console.log(error)
     }    
+    return true
 }
 
 async function deleteRiddle(id){
@@ -69,20 +69,24 @@ async function deleteRiddle(id){
         data = await readDBFile(path)
     } catch (error) {
         console.log(`Error read riddles: ${error}`)
-        return;
+        return false;
     }
     for (let i = 0; i < data.length; i++) {
-        if(data[i].id === id){
+        if(data[i].id == id){
             index = i
             break;
         }
     }
     try {
+        console.log(data);
         data.splice(index,1);
-        writeDBFile(path, data);
+        console.log(data);
+        await writeDBFile(path, data);
     } catch (error) {
         console.log(error)
+        return false;
     }    
+    return true;
 }
 
 export{
