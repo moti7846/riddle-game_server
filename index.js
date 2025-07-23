@@ -3,6 +3,7 @@ import logger from './middlewares/logger.js';
 import riddleRoutes from './routes/riddleRoutes.js';
 import playerRoutes from './routes/playerRoutes.js';
 import { initRiddles } from "./controllers/initRiddles.js";
+import cookieParser from "cookie-parser"
 import {config } from 'dotenv';
 config();
 
@@ -11,7 +12,10 @@ const PORT = process.env.PORT;
 const app = express();
 
 app.use(express.json())
+app.use(cookieParser());
 app.use(logger)
+
+// app.use("/login", authRoutes);
 
 app.use("/riddle" , riddleRoutes)
 app.use("/player" , playerRoutes)
