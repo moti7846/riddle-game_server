@@ -21,6 +21,7 @@ const riddles = [
 
 export async function initRiddles(req, res) {
     const db = await connect();
+    console.log("test");
     await db.collection("riddles").insertMany(riddles);
     res.status(201).json({ msg: "Riddles initialized." });
 }

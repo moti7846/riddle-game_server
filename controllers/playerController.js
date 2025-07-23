@@ -31,3 +31,13 @@ export async function updatePlayerTime(req, res) {
   }
   res.status(500).json({ msg: "Error updating player time.",result});
 }
+
+export async function newPlay(req, res) {
+  const player = await readByName(req.params.username);
+  if (!player) {
+    req.body.name = req.params.username
+    await createPlayer(req, res);
+    return
+  }
+  res.status(200).json(player);
+}

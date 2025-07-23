@@ -13,7 +13,7 @@ router.get("/", getAllRiddles)
 router.get("/:id",validateId, getRiddle)
 
 // POST /riddle
-router.post("/",validateBody,validateBody, createRiddle)
+router.post("/",validateBody, createRiddle)
 
 // PUT /riddle/:id
 router.put("/:id",validateId,validateBody, updateRiddle)
