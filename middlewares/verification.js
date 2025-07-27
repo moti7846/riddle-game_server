@@ -22,6 +22,8 @@ export function roleAdmin(req, res, next) {
     })
 }
 export function roleUser(req, res, next) {
+    console.log("test...........");
+
     jwt.verify(req.body.token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
             return res.json({ err })

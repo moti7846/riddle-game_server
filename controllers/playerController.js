@@ -12,6 +12,15 @@ export async function getAllPlayers(req, res) {
   res.status(200).json(players);
 }
 
+export async function getProfile(req, res) {
+  jwt.verify(req.body.token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ msg: "Invalid token." });
+    }
+    res.status(200).json({ player: decoded });
+  });
+}
+
 export async function getPlayer(req, res) {
   const { username, password } = req.body;
   const player = await readByName(username);
