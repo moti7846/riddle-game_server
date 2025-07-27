@@ -1,14 +1,16 @@
 import express from 'express';
-import { createPlayer, getAllPlayers, getPlayer, newPlay, updatePlayerTime } from '../controllers/playerController.js';
+import { createPlayer, getAllPlayers, getPlayer, getProfile, updatePlayerTime } from '../controllers/playerController.js';
+import { roleAdmin, roleUser } from '../middlewares/Verification.js';
 
 
 const router = express.Router();
 
-router.get("/allplayers",getAllPlayers)
-router.get("/:username",getPlayer)
-router.get("/play/:username", newPlay)
-router.post("/",createPlayer)
-router.post("/submit-score",updatePlayerTime)
+router.post("/login",getPlayer)
+router.post("/signup",createPlayer)
 
+router.post("/profile", getProfile)
+router.post("/submit-score",roleUser,updatePlayerTime)
+
+router.get("/allplayers",roleAdmin,getAllPlayers)
 
 export default router;
