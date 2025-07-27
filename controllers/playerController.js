@@ -24,19 +24,19 @@ export async function getPlayer(req, res) {
     process.env.JWT_SECRET,
     { expiresIn: "1h" }
   );
-  
-  // res.cookie("token", token, { httpOnly: true, maxAge: 3600000 });
-  res.json({success: true , token});
+
+  res.cookie("token", token, { httpOnly: true, maxAge: 3600000 });
+  res.json({ token }).status(200);
 }
 
 export async function createPlayer(req, res) {
   const { username, password } = req.body;
-    if (!(await readByName(username))?.error) return res.status(400).json({ message: "User exists" });
-  
-    const hashed = await bcrypt.hash(password, 10);
-    await create({ username, password: hashed });
-  
-    res.sendStatus(201);
+  if (!(await readByName(username))?.error) return res.status(400).json({ message: "User exists" });
+
+  const hashed = await bcrypt.hash(password, 10);
+  await create({ username, password: hashed });
+
+  res.sendStatus(201);
 }
 
 export async function updatePlayerTime(req, res) {
@@ -46,13 +46,3 @@ export async function updatePlayerTime(req, res) {
   }
   res.status(500).json({ msg: "Error updating player time.", result });
 }
-
-// export async function newPlay(req, res) {
-//   const player = await readByName(req.params.username);
-//   if (!player) {
-//     req.body.name = req.params.username
-//     await createPlayer(req, res);
-//     return
-//   }
-//   res.status(200).json(player);
-// }
